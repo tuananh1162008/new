@@ -11,14 +11,22 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
             overflow: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
         .fireworks {
@@ -32,68 +40,83 @@
         .particle {
             position: absolute;
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         .container {
             text-align: center;
             z-index: 10;
             animation: float 3s ease-in-out infinite;
-            padding: 20px;
+            padding: clamp(15px, 5vw, 30px);
             width: 100%;
             max-width: 100%;
+            max-height: 100vh;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
+        h1 {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
         .decorative {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            margin: 15px 0;
+            font-size: clamp(1.2rem, 5vw, 2.2rem);
+            margin: 10px 0 15px 0;
             animation: bounce 1.5s ease-in-out infinite;
+            letter-spacing: 0.3em;
         }
 
         .year {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 12vw, 4rem);
             background: linear-gradient(45deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 15px 0;
+            margin: 10px 0;
             animation: pulse 2s ease-in-out infinite;
             font-weight: bold;
+            line-height: 1;
         }
 
         .name {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.3rem, 5vw, 2.2rem);
             color: #fff;
-            margin: 20px 0 30px 0;
-            font-weight: 300;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 15px 0 25px 0;
+            font-weight: 400;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
             animation: fadeInUp 1.5s ease-out;
+            letter-spacing: 0.05em;
         }
 
         .messages {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 30px;
-            max-width: 90%;
+            gap: clamp(10px, 2vw, 15px);
+            margin-top: 20px;
+            padding: 0 clamp(10px, 3vw, 20px);
             width: 100%;
             max-width: 650px;
         }
 
         .message {
-            background: rgba(255, 255, 255, 0.1);
-            padding: clamp(15px, 4vw, 20px);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: clamp(12px, 4vw, 18px);
+            border-radius: clamp(12px, 3vw, 18px);
             color: #ffffff;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(0.85rem, 2.2vw, 1rem);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             animation: fadeInUp 2s ease-out forwards;
             opacity: 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            word-wrap: break-word;
         }
 
         .message:nth-child(1) {
@@ -110,12 +133,6 @@
 
         .message:nth-child(4) {
             animation-delay: 2s;
-        }
-
-        .decorative {
-            font-size: 2rem;
-            margin: 20px 0;
-            animation: bounce 1.5s ease-in-out infinite;
         }
 
         @keyframes slideIn {
@@ -145,7 +162,7 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.05);
             }
         }
 
@@ -154,25 +171,35 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
 
         .lantern {
             position: absolute;
-            font-size: 3rem;
+            font-size: clamp(2rem, 8vw, 3.5rem);
             animation: sway 4s ease-in-out infinite;
+            will-change: transform;
         }
 
         .lantern:nth-child(1) {
-            top: 10%;
-            left: 5%;
+            top: clamp(5%, 10vw, 15%);
+            left: clamp(2%, 5vw, 8%);
             animation-delay: 0s;
         }
 
         .lantern:nth-child(2) {
-            top: 15%;
-            right: 5%;
+            top: clamp(8%, 12vw, 18%);
+            right: clamp(2%, 5vw, 8%);
             animation-delay: 1s;
         }
 
@@ -181,30 +208,35 @@
                 transform: translateX(0);
             }
             50% {
-                transform: translateX(20px);
+                transform: translateX(clamp(10px, 3vw, 25px));
             }
         }
 
         .button-group {
-            margin-top: 35px;
+            margin-top: clamp(25px, 5vw, 40px);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: clamp(8px, 2vw, 12px);
+            width: 100%;
+            padding: 0 clamp(10px, 3vw, 20px);
         }
 
         button {
             background: linear-gradient(45deg, #ffd700, #ffed4e);
             border: none;
-            padding: clamp(12px, 3vw, 15px) clamp(25px, 5vw, 40px);
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: clamp(11px, 2.5vw, 14px) clamp(20px, 4vw, 35px);
+            font-size: clamp(0.8rem, 2.2vw, 1rem);
             border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             color: #333;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             white-space: nowrap;
+            -webkit-appearance: none;
+            appearance: none;
+            will-change: transform;
         }
 
         button:hover {
@@ -216,21 +248,149 @@
             transform: translateY(-1px);
         }
 
+        button:focus {
+            outline: none;
+        }
+
         .hearts {
             position: fixed;
             pointer-events: none;
+            width: 100%;
+            height: 100%;
         }
 
         .heart {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             animation: fallDown 3s linear forwards;
+            will-change: transform, opacity;
         }
 
         @keyframes fallDown {
             to {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                overflow-y: auto;
+                max-height: 100vh;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .year {
+                font-size: 2.5rem;
+                margin: 8px 0;
+            }
+
+            .decorative {
+                font-size: 1.3rem;
+                margin: 8px 0 12px 0;
+            }
+
+            .name {
+                font-size: 1.2rem;
+                margin: 12px 0 20px 0;
+            }
+
+            .messages {
+                gap: 10px;
+                margin-top: 15px;
+                padding: 0 10px;
+            }
+
+            .message {
+                padding: 12px;
+                font-size: 0.85rem;
+                border-radius: 12px;
+            }
+
+            .button-group {
+                margin-top: 25px;
+                gap: 8px;
+                padding: 0 10px;
+            }
+
+            button {
+                padding: 11px 18px;
+                font-size: 0.8rem;
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .lantern {
+                font-size: 2rem;
+            }
+
+            .lantern:nth-child(1) {
+                top: 8%;
+                left: 3%;
+            }
+
+            .lantern:nth-child(2) {
+                top: 12%;
+                right: 3%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .year {
+                font-size: 2rem;
+            }
+
+            .decorative {
+                font-size: 1.1rem;
+            }
+
+            .name {
+                font-size: 1rem;
+                margin: 10px 0 15px 0;
+            }
+
+            .message {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+
+            button {
+                padding: 10px 16px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                padding: 30px;
+            }
+
+            .messages {
+                gap: 15px;
+            }
+
+            .button-group {
+                gap: 12px;
+            }
+        }
+
+        /* Reduce animations on low-performance devices */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -261,7 +421,7 @@
                 🚀 Hãy dũng cảm bước tiến, vượt qua mọi thách thức, và tạo nên những điều tuyệt vời!
             </div>
             <div class="message">
-                🎊 Cảm ơn em vì những điều tốt đẹp, hy vọng năm mới mang lại những kỉ niệm đáng nhớ!
+                🎊 Cảm ơn emhãy vì những điều tốt đẹp, hy vọng năm mới mang lại những kỉ niệm đáng nhớ!
             </div>
         </div>
 
@@ -272,24 +432,31 @@
     </div>
 
     <script>
+        // Kiểm tra thiết bị di động
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const heartInterval = isMobile ? 800 : 500;
+        const autoFireworksInterval = isMobile ? 5000 : 3000;
+
         // Tạo pháo hoa
         function createFireworks() {
             const colors = ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffd700'];
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight / 2;
+            const particleCount = isMobile ? 20 : 30;
 
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = x + 'px';
                 particle.style.top = y + 'px';
-                particle.style.width = '10px';
-                particle.style.height = '10px';
+                const size = isMobile ? '8px' : '10px';
+                particle.style.width = size;
+                particle.style.height = size;
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.borderRadius = '50%';
                 particle.style.boxShadow = '0 0 10px currentColor';
 
-                const angle = (Math.PI * 2 * i) / 30;
+                const angle = (Math.PI * 2 * i) / particleCount;
                 const velocity = 5 + Math.random() * 5;
                 const vx = Math.cos(angle) * velocity;
                 const vy = Math.sin(angle) * velocity;
@@ -297,15 +464,16 @@
                 let px = x;
                 let py = y;
                 const gravity = 0.1;
+                const duration = isMobile ? 800 : 1000;
 
                 const animate = () => {
                     px += vx;
                     py += vy;
                     particle.style.left = px + 'px';
                     particle.style.top = py + 'px';
-                    particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / 1000);
+                    particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / duration);
 
-                    if ((Date.now() - startTime) < 1000) {
+                    if ((Date.now() - startTime) < duration) {
                         requestAnimationFrame(animate);
                     } else {
                         particle.remove();
@@ -329,58 +497,70 @@
             
             heartsContainer.appendChild(heart);
             
-            setTimeout(() => heart.remove(), 3000);
+            setTimeout(() => heart.remove(), 4000);
         }
 
-        // Tạo trái tim mỗi 0.5 giây
-        setInterval(createFallingHearts, 500);
+        // Tạo trái tim với interval tối ưu cho mobile
+        const heartTimer = setInterval(createFallingHearts, heartInterval);
 
-        // Tạo pháo hoa tự động mỗi 3 giây
-        setInterval(() => {
-            if (Math.random() > 0.5) {
+        // Tạo pháo hoa tự động (kém tần suất hơn trên mobile)
+        const fireworksTimer = setInterval(() => {
+            if (Math.random() > 0.6) {
                 createFireworks();
             }
-        }, 3000);
+        }, autoFireworksInterval);
 
         // Tạo pháo hoa ngay khi tải trang
         window.addEventListener('load', () => {
             setTimeout(() => createFireworks(), 500);
         });
 
-        // Xử lý click chuột để tạo pháo hoa
-        document.addEventListener('click', (e) => {
+        // Xử lý click/touch để tạo pháo hoa
+        function handleInteraction(e) {
             if (e.target.tagName !== 'BUTTON') {
                 const colors = ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffd700'];
-                const x = e.clientX;
-                const y = e.clientY;
+                let x, y;
 
-                for (let i = 0; i < 20; i++) {
+                if (e.touches) {
+                    // Touch event
+                    x = e.touches[0].clientX;
+                    y = e.touches[0].clientY;
+                } else {
+                    // Mouse event
+                    x = e.clientX;
+                    y = e.clientY;
+                }
+
+                const particleCount = isMobile ? 15 : 20;
+
+                for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'particle';
                     particle.style.left = x + 'px';
                     particle.style.top = y + 'px';
-                    particle.style.width = '8px';
-                    particle.style.height = '8px';
+                    particle.style.width = isMobile ? '7px' : '8px';
+                    particle.style.height = isMobile ? '7px' : '8px';
                     particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     particle.style.borderRadius = '50%';
                     particle.style.boxShadow = '0 0 8px currentColor';
 
-                    const angle = (Math.PI * 2 * i) / 20;
+                    const angle = (Math.PI * 2 * i) / particleCount;
                     const velocity = 3 + Math.random() * 3;
                     const vx = Math.cos(angle) * velocity;
                     const vy = Math.sin(angle) * velocity;
 
                     let px = x;
                     let py = y;
+                    const duration = isMobile ? 600 : 800;
 
                     const animate = () => {
                         px += vx;
                         py += vy;
                         particle.style.left = px + 'px';
                         particle.style.top = py + 'px';
-                        particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / 800);
+                        particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / duration);
 
-                        if ((Date.now() - startTime) < 800) {
+                        if ((Date.now() - startTime) < duration) {
                             requestAnimationFrame(animate);
                         } else {
                             particle.remove();
@@ -392,6 +572,16 @@
                     animate();
                 }
             }
+        }
+
+        // Thêm listener cho cả click và touch
+        document.addEventListener('click', handleInteraction, false);
+        document.addEventListener('touchstart', handleInteraction, false);
+
+        // Dọn dẹp khi trang bị đóng
+        window.addEventListener('beforeunload', () => {
+            clearInterval(heartTimer);
+            clearInterval(fireworksTimer);
         });
     </script>
 </body>

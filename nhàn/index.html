@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Năm Mới - Nguyễn Thanh Nhàn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fireworks {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+            padding: 20px;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .decorative {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 15px 0;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        .year {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+            animation: pulse 2s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #fff;
+            margin: 20px 0 30px 0;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+            max-width: 90%;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: clamp(15px, 4vw, 20px);
+            border-radius: 15px;
+            color: #ffffff;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 2s ease-out forwards;
+            opacity: 0;
+            line-height: 1.5;
+        }
+
+        .message:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .message:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .message:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        .message:nth-child(4) {
+            animation-delay: 2s;
+        }
+
+        .decorative {
+            font-size: 2rem;
+            margin: 20px 0;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .lantern {
+            position: absolute;
+            font-size: 3rem;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .lantern:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .lantern:nth-child(2) {
+            top: 15%;
+            right: 5%;
+            animation-delay: 1s;
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        .button-group {
+            margin-top: 35px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            padding: clamp(12px, 3vw, 15px) clamp(25px, 5vw, 40px);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: fallDown 3s linear forwards;
+        }
+
+        @keyframes fallDown {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    
+    <div class="container">
+        <div class="lantern">🏮</div>
+        <div class="lantern">🏮</div>
+        
+        <h1>🎉 CHÚC MỪNG NĂM MỚI 🎉</h1>
+        
+        <div class="year">2026</div>
+        
+        <div class="decorative">✨ 🌟 ✨</div>
+        
+        <div class="name">Nguyễn Thanh Nhàn</div>
+        
+        <div class="messages">
+            <div class="message">
+                💝 Mong rằng những ước mơ của em sẽ thành hiện thực trong năm mới này!
+            </div>
+            <div class="message">
+                🌈 Năm nay sẽ đem lại thật nhiều niềm vui, sức khỏe, và thành công cho em.
+            </div>
+            <div class="message">
+                🚀 Hãy dũng cảm bước tiến, vượt qua mọi thách thức, và tạo nên những điều tuyệt vời!
+            </div>
+            <div class="message">
+                🎊 Cảm ơn em vì những điều tốt đẹp, hy vọng năm mới mang lại những kỉ niệm đáng nhớ!
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="createFireworks()">🎆 Pháo Hoa</button>
+            <button onclick="location.reload()">Tải Lại</button>
+        </div>
+    </div>
+
+    <script>
+        // Tạo pháo hoa
+        function createFireworks() {
+            const colors = ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffd700'];
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight / 2;
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '10px';
+                particle.style.height = '10px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = '0 0 10px currentColor';
+
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 5 + Math.random() * 5;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                let px = x;
+                let py = y;
+                const gravity = 0.1;
+
+                const animate = () => {
+                    px += vx;
+                    py += vy;
+                    particle.style.left = px + 'px';
+                    particle.style.top = py + 'px';
+                    particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / 1000);
+
+                    if ((Date.now() - startTime) < 1000) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                };
+
+                const startTime = Date.now();
+                document.body.appendChild(particle);
+                animate();
+            }
+        }
+
+        // Tạo trái tim rơi
+        function createFallingHearts() {
+            const heartsContainer = document.querySelector('.hearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+            
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        // Tạo trái tim mỗi 0.5 giây
+        setInterval(createFallingHearts, 500);
+
+        // Tạo pháo hoa tự động mỗi 3 giây
+        setInterval(() => {
+            if (Math.random() > 0.5) {
+                createFireworks();
+            }
+        }, 3000);
+
+        // Tạo pháo hoa ngay khi tải trang
+        window.addEventListener('load', () => {
+            setTimeout(() => createFireworks(), 500);
+        });
+
+        // Xử lý click chuột để tạo pháo hoa
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                const colors = ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffd700'];
+                const x = e.clientX;
+                const y = e.clientY;
+
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.width = '8px';
+                    particle.style.height = '8px';
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.borderRadius = '50%';
+                    particle.style.boxShadow = '0 0 8px currentColor';
+
+                    const angle = (Math.PI * 2 * i) / 20;
+                    const velocity = 3 + Math.random() * 3;
+                    const vx = Math.cos(angle) * velocity;
+                    const vy = Math.sin(angle) * velocity;
+
+                    let px = x;
+                    let py = y;
+
+                    const animate = () => {
+                        px += vx;
+                        py += vy;
+                        particle.style.left = px + 'px';
+                        particle.style.top = py + 'px';
+                        particle.style.opacity = Math.max(0, 1 - (Date.now() - startTime) / 800);
+
+                        if ((Date.now() - startTime) < 800) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            particle.remove();
+                        }
+                    };
+
+                    const startTime = Date.now();
+                    document.body.appendChild(particle);
+                    animate();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
